@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    volumes:
+      - ./@types:/app/@types
+      - ./_posts:/app/_posts
+      - ./components:/app/components
+      - ./interfaces:/app/interfaces
+      - ./lib:/app/lib
+      - ./pages:/app/pages
+      - ./public:/app/public
+      - ./styles:/app/styles
+      - ./next.config.js:/app/next.config.js
+      - ./next-env.d.ts:/app/next-env.d.ts
+      - ./package.json:/app/package.json
+      - ./postcss.config.js:/app/postcss.config.js
+      - ./tailwind.config.js:/app/tailwind.config.js
+      - ./tsconfig.json:/app/tsconfig.json
+    ports:
+      - "3000:3000"
+    command: npm run dev

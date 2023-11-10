@@ -1,12 +1,22 @@
-import { parseISO, format } from 'date-fns'
+import React from "react";
+import {DateTime} from "luxon";
+// import { parseISO, format } from 'date-fns'
+
+
 
 type Props = {
-  dateString: string
+  isoDate: string
 }
 
-const DateFormatter = ({ dateString }: Props) => {
-  const date = parseISO(dateString)
-  return <time dateTime={dateString}>{format(date, 'LLLL	d, yyyy')}</time>
+export default function DateFormatter({ isoDate }: Props) {
+  const [localDate, setLocalDate] = React.useState<string | null>(null);
+  
+  React.useEffect(() => {
+    const dateTime = DateTime.fromISO(isoDate);
+    setLocalDate(dateTime.isValid ? dateTime.toLocaleString() : null);
+  }, [isoDate]);
+  
+  return localDate
+    ? <time dateTime={isoDate}>{localDate}</time>
+    : <></>;
 }
-
-export default DateFormatter

@@ -4,11 +4,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'accent-1': '#FAFAFA',
+        'accent-1': '#F2F2F2',
         'accent-2': '#EAEAEA',
-        'accent-7': '#333',
+        'accent-7': '#304359',
+        'banner-dark': '#304359',
+        'banner-light': '#F2F2F2',
+        'banner-mid': '#756954',
         success: '#0070f3',
         cyan: '#79FFE1',
+        link: '#60A5FA', // text-blue-400
       },
       spacing: {
         28: '7rem',
