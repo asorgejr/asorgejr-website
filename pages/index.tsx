@@ -19,7 +19,6 @@ export default function Index({ allPosts }: Props) {
   const heroBg: BannerLayer = {
     image: '/assets/images/del-mar-selfie-layer1.png',
     speed: -3,
-
   }
   const heroFg: BannerLayer = {
     image: '/assets/images/del-mar-selfie-layer2.png',
@@ -31,7 +30,7 @@ export default function Index({ allPosts }: Props) {
   }
   const heroText: BannerLayer = {
     children: (
-      <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center">
+      <div className="relative top-0 left-0 w-full h-full flex flex-col justify-center items-center">
         <h1 className="text-5xl md:text-8xl font-light tracking-tight leading-tight md:pr-8 text-white">
           Anthony Sorge
         </h1>
@@ -41,7 +40,11 @@ export default function Index({ allPosts }: Props) {
         </h6>
       </div>
     ),
-    speed: 0,
+    startScroll: 5,
+    endScroll: 250,
+    easing: [1,.02,.59,1],
+    translateY: [0, -10],
+    opacity: [1.0, 0.0]
   }
   
   return (
@@ -56,12 +59,13 @@ export default function Index({ allPosts }: Props) {
         />
       </ParallaxProvider>
       <>
-        <TextBanner heading={"Background"} variant={TextBannerVariant.Dark} content={(
+        <TextBanner heading={"Background"} variant={TextBannerVariant.Dark} expectInView={true}
+                    content={(
           <p>
             I am a software engineer with a passion for building products that make a difference in people's lives.
             I began my career as a hobbyist, programming small games and websites. I quickly realized that I had a
             passion for programming and decided to pursue it as a career. In 2018, I founded a mobile game studio
-            called <a href="https://bcsgames.com" className="text-link"> BCS Games</a> with several colleagues.
+            called <a href="https://bcsgames.com" className="link"> BCS Games</a> with several colleagues.
             During this time, I learned a lot about the business side of software development and how to build a
             product from the ground up. In 2022, I decided to pivot towards web development and have devoted my time
             to learning the ins and outs of popular web frameworks such as React and Next.js, as well as API
