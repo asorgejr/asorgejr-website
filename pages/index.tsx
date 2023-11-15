@@ -8,11 +8,12 @@ import {BannerLayer, ParallaxBanner, ParallaxProvider} from "react-scroll-parall
 import {TextBanner, TextBannerVariant} from "@/components/text-banner";
 import {SkillsGrid} from "@/components/skills-table";
 
+
+const kBannerParagraphStyle = "text-feature 2xl:pr-24 pr-0";
+
 type Props = {
   allPosts: Post[]
 }
-
-
 
 export default function Index({ allPosts }: Props) {
   const fgOffset = 20;
@@ -61,22 +62,17 @@ export default function Index({ allPosts }: Props) {
       <>
         <TextBanner heading={"Background"} variant={TextBannerVariant.Dark} expectInView={true}
                     content={(
-          <p className="text-feature">
-            I am a software engineer with 6 years experience and a passion for building products that make a difference 
+          <p className={kBannerParagraphStyle}>
+            I am a developer with 6 years experience and a passion for building products that make a difference 
             in people's lives. Recently, I pivoted towards web development and have devoted my time
             to jobs involving popular web frameworks like React and Next.js, as well as API development with AWS.
-            <br/><br/>
-            I am currently looking for a full-time position as a 
-            software engineer. <a href="mailto:asorgejr@gmail.com"
-                                  className="link"
-                                  target="_blank">Drop me a message</a> if you are interested in working with me!
           </p>
         )} />
         <TextBanner heading={"Skills"} variant={TextBannerVariant.Light} content={(
           <SkillsGrid />
         )} />
         <TextBanner heading={"About Me"} variant={TextBannerVariant.Dark} content={(
-          <p className="text-feature">
+          <p className={kBannerParagraphStyle}>
             I'm a San Diego native. I began my career as a hobbyist, programming small games and websites.
             I quickly realized that I had a passion for programming and decided to pursue it as a career. In 2018
             I founded a mobile game studio, <a href="https://bcsgames.com" className="link"> BCS Games</a>, with

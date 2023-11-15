@@ -24,6 +24,7 @@ export default function Blog({ allPosts }: Props) {
         </Head>
         
         <Container>
+          <div className="h-8" />
           {heroPost && (
             <HeroPost
               title={heroPost.title}

@@ -10,24 +10,42 @@ ogImage:
   url: '/assets/blog/feudal-doodle/cover.webp'
 ---
 
-## Overview
-We at BCS Games are thrilled to announce the launch of our latest mobile game, Feudal Doodle.
-This innovative wave-based combat game builds upon the mobile gaming experience with its unique drawing-based attack mechanics and visually stunning graphics, all developed in Unity.
+## Introduction
+In the ever-evolving world of mobile gaming, BCS Games' latest title, "Feudal Doodle," stands out with its innovative wave-based combat system where players draw their attacks to defeat enemies. In this case study, I'll share my journey as the lead in look development and my contributions to the game's unique visual style and engaging gameplay.
 
-### Unique Combat System
-One of the standout features of Feudal Doodle is its combat system. Instead of the traditional tap-and-swipe mechanics, players get to draw their attacks on the screen. This system not only makes the gameplay more interactive but also allows for a wide range of creative strategies.
+## Role and Responsibilities
+As the head of look development for "Feudal Doodle," my role encompassed a wide range of responsibilities:
 
-### Custom Rendering Pipeline
-As a software engineer, I took on the exciting challenge of authoring a custom rendering pipeline for Feudal Doodle. This pipeline gives the game its distinctive visual style, featuring a hatch-gradient appearance for all visible objects. This artistic choice not only sets our game apart in terms of aesthetics but also showcases the technical capabilities of our team.
+**Wave System and AI Involvement:**
+Played a significant role in developing the game's wave system and AI, enhancing player engagement and challenge.
 
-## Behind the Scenes: Unity Development
-The development of Feudal Doodle was a journey of innovation and learning. Using Unity, a leading game development platform, we were able to bring our creative vision to life.
+**Technical Innovation:**
+Developed a custom rendering pipeline in Unity for a distinctive hand-drawn look, using a hatch-gradient style.
 
-**Unity's Flexible Environment:**
-The Unity engine provided us with the tools and flexibility needed to experiment with unique game mechanics and visual styles.
+**Asset Development:**
+Modeled and rigged numerous character models and environment assets, ensuring they fit seamlessly within the game's aesthetic.
 
-**Optimizing Performance:**
-Ensuring that the game runs smoothly on a range of devices was a top priority. Our custom rendering pipeline was optimized for performance without compromising on the visual quality.
+## Challenges and Solutions
+One of the primary challenges was achieving the hand-drawn appearance that was central to "Feudal Doodle's" identity. Traditional methods in Unity fell short in delivering the desired aesthetic, prompting me to innovate.
+
+**Solution:**
+Custom Rendering Pipeline: I authored a Scriptable Rendering Pipeline in Unity, tailored to produce a unique hatch-gradient appearance. This involved extensive experimentation and fine-tuning to ensure that all visible objects in the game maintained a consistent and appealing hand-drawn look.
+
+## Tools and Technologies
+Leveraging a suite of cutting-edge tools was crucial in bringing "Feudal Doodle" to life:
+
+**Unity:**
+Utilized for overall game development, with a focus on custom scripting and rendering.
+
+**C# MonoBehaviour:**
+Scripted game behaviors and interactions.
+
+**Blender, Houdini FX, and ZBrush:**
+Employed for modeling, rigging, and texturing of game assets, contributing to the game's distinct visual style.
+
+
+## Outcome and Impact
+"Feudal Doodle" was successfully launched on iOS and Android app stores. While the user base was modest, the game received enthusiastic feedback from those who played it, highlighting the engaging gameplay and unique visual style. My contributions in look development and the wave system played a pivotal role in shaping the game's identity and enhancing the overall player experience.
 
 ## Final Thoughts
 Feudal Doodle is not just a game; it's a testament to our commitment to innovation and quality in mobile gaming. We believe that this game will provide players with a fresh and engaging experience, and we can't wait for you to try it out.

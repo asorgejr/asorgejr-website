@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 export const NAVBAR_HEIGHT_PX = 64;
 export const NAVBAR_HEIGHT = 16; // 16
@@ -31,7 +32,7 @@ function NavButton({ label, href, active }: NavButtonProps) {
   }, []);
   
   return (
-      <a className={`w-16 h-12 flex flex-row justify-center items-center
+      <Link className={`w-16 h-12 flex flex-row justify-center items-center
       ${path === href
         ? "bg-gradient-to-tr from-blue-200 to-purple-400 bg-clip-text text-transparent"
         : "text-gray-400 transition-colors duration-100 ease-in-out"
@@ -42,7 +43,7 @@ function NavButton({ label, href, active }: NavButtonProps) {
         <div className={`text-2xl font-light tracking-tighter leading-tight`}>
           {label}
         </div>
-      </a>
+      </Link>
   )
 }
 
