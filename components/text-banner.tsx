@@ -21,7 +21,7 @@ export function TextBanner({ heading, content, variant, expectInView }: TextBann
   const bgColor = variant === TextBannerVariant.Light ? "bg-accent-1" : "bg-accent-7";
   const contentStyle = typeof content === "string"
     ? "text-normal font-normal flex-1 md:pl-0 pl-8 md:pr-0 pr-8"
-    : "flex-1 md:pl-0 pl-8 md:pr-0 pr-8";
+    : "flex-1 md:pl-0 pl-8 md:pr-24 pr-8";
   
   const controls = useAnimation();
   const [ref, inView] = useInView({

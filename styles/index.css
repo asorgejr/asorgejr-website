@@ -12,5 +12,9 @@
   .link:hover {
     @apply text-blue-400 underline;
   }
+  
+  .text-feature {
+    @apply text-xl font-light;
+  }
 }
 
