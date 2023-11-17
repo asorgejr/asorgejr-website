@@ -1,6 +1,5 @@
 ---
 title: 'A New Chapter: Transitioning from Game Development to Web Development'
-excerpt: 'As I turn the page to a new chapter in my professional journey, I want to take a moment to reflect on the past four years at BCS Games. It has been an incredible ride, filled with challenges, learning, and most importantly, growth. Working in the gaming industry allowed me to push the boundaries'
 coverImage: '/assets/blog/leaving-bcs/cover.jpg'
 date: '2022-09-05T02:33:08.322Z'
 author:
