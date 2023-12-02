@@ -2,7 +2,7 @@ import React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import PostPreview from './post-preview'
-import type Post from '@/interfaces/post'
+import {Post} from '@/interfaces/post'
 
 type Props = {
   posts: Post[],
@@ -36,12 +36,12 @@ const BlogsGrid = ({ posts, limit }: Props) => {
       >
         {posts.map((post) => (
           <PostPreview
-            key={post.slug}
+            key={post.name}
             title={post.title}
-            coverImage={post.coverImage}
+            coverImage={post.coverImage.length > 0 ? post.coverImage[0] : '/assets/blog/default-banner.jpg'}
             date={post.date}
             author={post.author}
-            slug={post.slug}
+            slug={post.name}
             excerpt={post.excerpt}
           />
         ))}

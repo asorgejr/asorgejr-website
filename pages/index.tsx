@@ -1,18 +1,41 @@
+import { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import Head from 'next/head'
+import {BannerLayer, ParallaxBanner, ParallaxProvider} from "react-scroll-parallax";
+import {Api} from '@/lib/api'
 import Container from '@/components/container'
 import BlogsGrid from '@/components/blogs-grid'
 import Layout from '@/components/layout'
-import {Api} from '@/lib/api'
-import Head from 'next/head'
-import Post from '@/interfaces/post'
-import {BannerLayer, ParallaxBanner, ParallaxProvider} from "react-scroll-parallax";
 import {TextBanner, TextBannerVariant} from "@/components/text-banner";
 import {SkillsGrid} from "@/components/skills-table";
+import {IPost, Post, PostSchema} from '@/interfaces/post'
 
 
 const kBannerParagraphStyle = "text-feature 2xl:pr-24 pr-0";
 
 type Props = {
   allPosts: Post[]
+}
+
+
+export async function getServerSideProps(): Promise<{ props: Props }> {
+  const posts = await Api.getAllPosts()
+  const allPosts: IPost[] = posts.map((post) => ({
+    _id: post._id,
+    title: post.title,
+    author: {
+      name: null,
+      picture: null,
+    },
+    date: post.date,
+    name: post.name,
+    coverImage: post.coverImage,
+    excerpt: "",
+    content: "",
+  }))
+
+  return {
+    props: { allPosts },
+  }
 }
 
 export default function Index({ allPosts }: Props) {
@@ -83,7 +106,9 @@ export default function Index({ allPosts }: Props) {
         <Container>
           <div className="pt-8">
             <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight">Posts</h2>
-            {allPosts.length > 0 && <BlogsGrid posts={allPosts} limit={2} />}
+            {
+              allPosts.length > 0 && <BlogsGrid posts={allPosts} limit={2} />
+            }
           </div>
         </Container>
       </>
@@ -91,17 +116,15 @@ export default function Index({ allPosts }: Props) {
   )
 }
 
-export const getStaticProps = async () => {
-  const allPosts = Api.getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
-
-  return {
-    props: { allPosts },
-  }
-}
+// export const getStaticProps = async () => {
+//   const allPosts = Api.getAllPosts([
+//     'title',
+//     'date',
+//     'slug',
+//     'coverImage',
+//   ])
+//
+//   return {
+//     props: { allPosts },
+//   }
+// }

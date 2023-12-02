@@ -1,4 +1,4 @@
-import Post from "@/interfaces/post";
+import {IPost, Post, PostSchema} from "@/interfaces/post";
 import Head from "next/head";
 import Container from "@/components/container";
 import HeroPost from "@/components/hero-post";
@@ -6,6 +6,7 @@ import BlogsGrid from "@/components/blogs-grid";
 import {Api} from "@/lib/api";
 import {Navbar} from "@/components/navbar";
 import Layout from "@/components/layout";
+import Author from "@/interfaces/author";
 
 
 type Props = {
@@ -22,16 +23,15 @@ export default function Blog({ allPosts }: Props) {
         <Head>
           <title>{`ANTHONY SORGE | Blogs`}</title>
         </Head>
-        
         <Container>
           <div className="h-8" />
           {heroPost && (
             <HeroPost
               title={heroPost.title}
-              coverImage={heroPost.coverImage}
+              coverImage={heroPost.coverImage.length > 0 ? heroPost.coverImage[0] : '/assets/blog/default-banner.jpg'}
               date={heroPost.date}
               author={heroPost.author}
-              slug={heroPost.slug}
+              slug={heroPost.name}
               excerpt={heroPost.excerpt}
             />
           )}
@@ -42,17 +42,36 @@ export default function Blog({ allPosts }: Props) {
   )
 }
 
-export const getStaticProps = async () => {
-  const allPosts = Api.getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
-
+export const getServerSideProps = async () => {
+  let allPosts: PostSchema[] = [];
+  try {
+    allPosts = await Api.getAllPosts();
+  } catch (e) {
+    console.log(`Error fetching posts: ${e}`);
+    return {
+      props: {
+        allPosts: [],
+      },
+    }
+  }
+  // console.log(`allPosts: ${JSON.stringify(allPosts)}`);
   return {
-    props: { allPosts },
+    props: {
+      allPosts: allPosts.map((post) => {
+        return {
+          _id: post._id,
+          name: post.name,
+          title: post.title,
+          date: post.date,
+          coverImage: post.coverImage,
+          author: {
+            name: null,
+            picture: null,
+          } as Author,
+          excerpt: "",
+          content: "",
+        } as IPost;
+      }),
+    },
   }
 }

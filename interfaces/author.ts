@@ -1,6 +1,4 @@
-type Author = {
-  name: string
-  picture: string
+export default interface Author {
+  name: string | null
+  picture: string | null
 }
-
-export default Author
