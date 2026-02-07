@@ -15,6 +15,7 @@ export function getDesiredImageFormatData(
   image: StrapiImage,
   format: StrapiImageFormatKey
 ): StrapiImageFormat {
+  if (!image) throw new Error("No image provided");
   const formats = image.formats ?? {};
   const start = PRECEDENCE.indexOf(format);
 

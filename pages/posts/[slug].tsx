@@ -32,8 +32,8 @@ export default function Post({ post }: Props) {
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
-  const coverImageData = getDesiredImageFormatData(coverImage, "large");
-  const ogImageData = getDesiredImageFormatData(ogImage, "large");
+  const coverImageData = coverImage && getDesiredImageFormatData(coverImage, "large") || null;
+  const ogImageData = ogImage && getDesiredImageFormatData(ogImage, "large") || null;
   return (
     <Layout>
       <Container>
@@ -45,11 +45,11 @@ export default function Post({ post }: Props) {
             <article className="mb-32">
               <Head>
                 <title>{title}</title>
-                <meta property="og:image" content={ogImageData.url} />
+                <meta property="og:image" content={ogImageData?.url || ""} />
               </Head>
               <PostHeader
                 title={title}
-                coverImage={coverImageData.url}
+                coverImage={coverImageData?.url || ""}
                 date={date}
                 author={author}
               />

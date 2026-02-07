@@ -1,7 +1,7 @@
 export type StrapiAuthor = {
   id: number,
-  name?: string,
-  avatar?: StrapiImage | null,
+  name: string,
+  avatar: StrapiImage | null,
 };
 
 export type StrapiImageFormat = {
@@ -29,7 +29,7 @@ export type StrapiPost = {
   title: string,
   date: string,
   content: string,
-  author?: StrapiAuthor | null,
+  author: StrapiAuthor,
   coverImage?: StrapiImage | null,
   ogImage?: StrapiImage | null,
 };

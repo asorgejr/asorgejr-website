@@ -17,7 +17,7 @@ const BlogsGrid = ({ posts, limit }: Props) => {
   const formattedPosts: Post[] = posts.map((post) => {
     return {
       ...post,
-      coverImage: getDesiredImageFormatData(post.coverImage, 'medium'),
+      coverImage: post.coverImage && getDesiredImageFormatData(post.coverImage, 'medium') || null,
     } as Post;
   });
   const controls = useAnimation();

@@ -19,7 +19,7 @@ const HeroPost = ({
   excerpt,
   slug,
 }: Props) => {
-  const formattedCoverImage = getDesiredImageFormatData(coverImage, 'medium');
+  const formattedCoverImage = coverImage && getDesiredImageFormatData(coverImage, 'medium') || null;
   return (
     <section>
       <div className="mb-8 md:mb-16">
@@ -42,7 +42,7 @@ const HeroPost = ({
         </div>
         <div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          {/*<Avatar name={author.name} picture={author.picture} />*/}
+          {/*<Avatar name={author.name} picture={author.avatar} />*/}
         </div>
       </div>
     </section>

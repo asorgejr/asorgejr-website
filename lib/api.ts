@@ -3,7 +3,7 @@ import {
   StrapiPagination, StrapiPost, StrapiListResponse
 } from '../interfaces/strapi';
 
-const apiUrl = process.env.NEXT_PUBLIC_API_URL || '';
+const strapiUrl = process.env.STRAPI_API_URL || '';
 const strapiApiToken = process.env.STRAPI_API_TOKEN;
 
 const headers: Record<string, string> = strapiApiToken
@@ -29,7 +29,7 @@ export async function getPosts(opts: {
   };
 
   try {
-    const url = withPopulates(`${apiUrl}/api/posts`, buildQuery(params), buildPopulates(populates));
+    const url = withPopulates(`${strapiUrl}/api/posts`, buildQuery(params), buildPopulates(populates));
     const json = await fetchJson<StrapiListResponse<StrapiPost>>(url, { headers });
     const pagination = json.meta?.pagination || null;
     return { posts: json.data || [], pagination };
@@ -45,7 +45,7 @@ export async function getPostBySlug(slug: string, fields: string[] = []): Promis
     'filters[slug][$eq]': slug,
   };
   try {
-    const url = withPopulates(`${apiUrl}/api/posts`, buildQuery(params), buildPopulates(populates));
+    const url = withPopulates(`${strapiUrl}/api/posts`, buildQuery(params), buildPopulates(populates));
     const json = await fetchJson<StrapiListResponse<StrapiPost>>(url, { headers });
     const post = (json.data && json.data[0]) as StrapiPost | undefined;
     if (!post) return null;
@@ -55,10 +55,7 @@ export async function getPostBySlug(slug: string, fields: string[] = []): Promis
     
     // Ensure only the minimal needed data is exposed.
     for (const field of fields) {
-      if (postFieldHandlers[field]) {
-        postResponse[field] = postFieldHandlers[field](post);
-      }
-      else if (typeof post[field] !== 'undefined') {
+      if (typeof post[field] !== 'undefined') {
         postResponse[field] = post[field];
       }
     }
@@ -78,12 +75,6 @@ async function fetchJson<T>(url: string, init: RequestInit = {}): Promise<T> {
     throw new Error(`Strapi request failed: ${res.status} ${res.statusText} (${url}) ${body}`);
   }
   return res.json();
-}
-
-function toAbsMediaUrl(maybeRelativeUrl: string | null): string {
-  if (!maybeRelativeUrl) return '';
-  if (maybeRelativeUrl.startsWith('http://') || maybeRelativeUrl.startsWith('https://')) return maybeRelativeUrl;
-  return `${apiUrl}${maybeRelativeUrl.startsWith('/') ? '' : '/'}${maybeRelativeUrl}`;
 }
 
 function buildPopulates(fields: readonly string[]): string {
@@ -109,15 +100,6 @@ function buildQuery(params: Record<string, string | number | boolean | undefined
   const qs = usp.toString();
   return qs ? `?${qs}` : '';
 }
-
-const postFieldHandlers: Record<string, (post: StrapiPost) => any> = {
-  author: (post: StrapiPost) => {
-    return {
-      name: post.author?.name || '',
-      avatar: toAbsMediaUrl(post.author?.avatar?.url) || '',
-    };
-  },
-};
 
 function withPopulates(baseUrl: string, query: string, populateQs: string): string {
   const joiner = query ? '&' : '?';
