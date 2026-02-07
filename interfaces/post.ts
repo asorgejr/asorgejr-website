@@ -1,16 +1,14 @@
-import type Author from './author'
+import { StrapiAuthor, StrapiImage } from '@/interfaces/strapi';
 
 type PostType = {
   slug: string
   title: string
   date: string
-  coverImage: string
-  author: Author
+  coverImage: StrapiImage
+  author: StrapiAuthor
   excerpt: string
-  ogImage: {
-    url: string
-  }
+  ogImage: StrapiImage
   content: string
 }
 
-export default PostType
+export default PostType;

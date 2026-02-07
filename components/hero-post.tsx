@@ -1,15 +1,14 @@
-import Avatar from './avatar'
-import DateFormatter from './date-formatter'
-import CoverImage from './cover-image'
-import Link from 'next/link'
-import type Author from '@/interfaces/author'
+import DateFormatter from './date-formatter';
+import CoverImage from './cover-image';
+import Link from 'next/link';
+import { StrapiImage } from '@/interfaces/strapi';
+import { getDesiredImageFormatData } from '@/utils/image';
 
 type Props = {
   title: string
-  coverImage: string
+  coverImage: StrapiImage
   date: string
   excerpt: string
-  author: Author
   slug: string
 }
 
@@ -18,13 +17,13 @@ const HeroPost = ({
   coverImage,
   date,
   excerpt,
-  author,
   slug,
 }: Props) => {
+  const formattedCoverImage = getDesiredImageFormatData(coverImage, 'medium');
   return (
     <section>
       <div className="mb-8 md:mb-16">
-        <CoverImage title={title} src={coverImage} slug={slug} />
+        <CoverImage title={title} src={formattedCoverImage.url} slug={slug} />
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
@@ -47,7 +46,7 @@ const HeroPost = ({
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default HeroPost
+export default HeroPost;

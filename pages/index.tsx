@@ -1,10 +1,10 @@
-import Container from '@/components/container'
-import BlogsGrid from '@/components/blogs-grid'
-import Layout from '@/components/layout'
-import {Api} from '@/lib/api'
-import Head from 'next/head'
-import Post from '@/interfaces/post'
+import Head from 'next/head';
 import {BannerLayer, ParallaxBanner, ParallaxProvider} from "react-scroll-parallax";
+import { POSTS_DEFAULT_FETCH } from '@/lib/constants';
+import Container from '@/components/container';
+import BlogsGrid from '@/components/blogs-grid';
+import Layout from '@/components/layout';
+import Post from '@/interfaces/post';
 import {TextBanner, TextBannerVariant} from "@/components/text-banner";
 import {SkillsGrid} from "@/components/skills-table";
 
@@ -12,23 +12,22 @@ import {SkillsGrid} from "@/components/skills-table";
 const kBannerParagraphStyle = "text-feature 2xl:pr-24 pr-0";
 
 type Props = {
-  allPosts: Post[]
+  posts: Post[]
 }
 
-export default function Index({ allPosts }: Props) {
-  const fgOffset = 20;
+export default function Index({ posts }: Props) {
   const heroBg: BannerLayer = {
     image: '/assets/images/del-mar-selfie-layer1.png',
     speed: -3,
-  }
+  };
   const heroFg: BannerLayer = {
     image: '/assets/images/del-mar-selfie-layer2.png',
     speed: 5,
-  }
+  };
   const heroDarkOverlay: BannerLayer = {
     children: <div className="absolute top-0 left-0 w-full h-full flex flex-col justify-center items-center bg-black opacity-50" />,
     speed: 0,
-  }
+  };
   const heroText: BannerLayer = {
     children: (
       <div className="relative top-0 left-0 w-full h-full flex flex-col justify-center items-center">
@@ -46,7 +45,7 @@ export default function Index({ allPosts }: Props) {
     easing: [1,.02,.59,1],
     translateY: [0, -10],
     opacity: [1.0, 0.0]
-  }
+  };
   
   return (
     <Layout>
@@ -63,9 +62,9 @@ export default function Index({ allPosts }: Props) {
         <TextBanner heading={"Background"} variant={TextBannerVariant.Dark} expectInView={true}
                     content={(
           <p className={kBannerParagraphStyle}>
-            I am a developer with 6 years experience and a passion for building products that make a difference 
-            in people's lives. Recently, I pivoted towards web development and have devoted my time
-            to jobs involving popular web frameworks like React and Next.js, as well as API development with AWS.
+            I am a developer with {new Date().getFullYear() - 2017} years experience and a passion for building products
+            that make a difference. In 2022, I pivoted towards web development as a career focus and have devoted my time
+            to jobs involving popular web frameworks like React and Next.js, API development, and cloud infrastructure.
           </p>
         )} />
         <TextBanner heading={"Skills"} variant={TextBannerVariant.Light} content={(
@@ -83,25 +82,22 @@ export default function Index({ allPosts }: Props) {
         <Container>
           <div className="pt-8">
             <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight">Posts</h2>
-            {allPosts.length > 0 && <BlogsGrid posts={allPosts} limit={2} />}
+            {posts.length > 0 && <BlogsGrid posts={posts} limit={2} />}
           </div>
         </Container>
       </>
     </Layout>
-  )
+  );
 }
 
 export const getStaticProps = async () => {
-  const allPosts = Api.getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'coverImage',
-    'excerpt',
-  ])
+  const Api = await import('@/lib/api');
+  const { posts, pagination } = await Api.getPosts({
+    ...POSTS_DEFAULT_FETCH,
+  });
 
   return {
-    props: { allPosts },
-  }
-}
+    props: { posts, pagination },
+    revalidate: Number(process.env.NEXT_PUBLIC_POSTS_REVALIDATE_SECONDS || 300),
+  };
+};

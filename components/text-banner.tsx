@@ -1,7 +1,7 @@
 import React from "react";
+import { JSX } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-
 
 
 export enum TextBannerVariant {
@@ -58,7 +58,7 @@ export function TextBanner({ heading, content, variant, expectInView }: TextBann
         {content}
       </motion.div>
     </div>
-  )
+  );
 }
 
 
@@ -79,7 +79,7 @@ const headerAnimVariant = {
       duration: ANIM_DUR,
     },
   },
-}
+};
 
 const contentAnimVariant = {
   visible: {
@@ -96,4 +96,4 @@ const contentAnimVariant = {
       duration: ANIM_DUR,
     },
   },
-}
+};

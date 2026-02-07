@@ -3,16 +3,13 @@ import Link from "next/link";
 
 export const NAVBAR_HEIGHT_PX = 64;
 export const NAVBAR_HEIGHT = 16; // 16
-const FONT_STYLE = "text-white text-2xl font-light tracking-tighter leading-tight text-white"
-
 
 interface NavButtonProps {
   label: string;
   href: string;
-  active?: boolean;
 }
 
-function NavButton({ label, href, active }: NavButtonProps) {
+function NavButton({ label, href }: NavButtonProps) {
   const [path, setPath] = React.useState<string | null>(null);
   
   React.useEffect(() => {
@@ -38,13 +35,13 @@ function NavButton({ label, href, active }: NavButtonProps) {
         : "text-gray-400 transition-colors duration-100 ease-in-out"
       } hover:text-white transition-colors duration-100 ease-in-out
       `}
-         href={href}
+        href={href}
       >
         <div className={`text-2xl font-light tracking-tighter leading-tight`}>
           {label}
         </div>
       </Link>
-  )
+  );
 }
 
 
@@ -78,5 +75,5 @@ export function Navbar(props: NavbarProps) {
         <NavButton label={"BLOG"} href={"/blog"} />
       </div>
     </div>
-  )
+  );
 }
