@@ -1,8 +1,9 @@
 import React from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import PostPreview from './post-preview'
-import type Post from '@/interfaces/post'
+import PostPreview from './post-preview';
+import type Post from '@/interfaces/post';
+import { getDesiredImageFormatData } from '@/utils/image';
 
 type Props = {
   posts: Post[],
@@ -11,8 +12,14 @@ type Props = {
 
 const BlogsGrid = ({ posts, limit }: Props) => {
   if (limit) {
-    posts = posts.slice(0, limit)
+    posts = posts.slice(0, limit);
   }
+  const formattedPosts: Post[] = posts.map((post) => {
+    return {
+      ...post,
+      coverImage: post.coverImage && getDesiredImageFormatData(post.coverImage, 'medium') || null,
+    } as Post;
+  });
   const controls = useAnimation();
   const [ref, inView] = useInView({
     threshold: 0.2,
@@ -34,23 +41,22 @@ const BlogsGrid = ({ posts, limit }: Props) => {
                   initial="hidden"
                   animate={controls}
       >
-        {posts.map((post) => (
+        {formattedPosts.map((post) => (
           <PostPreview
             key={post.slug}
             title={post.title}
-            coverImage={post.coverImage}
+            coverImage={post.coverImage.url}
             date={post.date}
-            author={post.author}
             slug={post.slug}
             excerpt={post.excerpt}
           />
         ))}
       </motion.div>
     </section>
-  )
-}
+  );
+};
 
-export default BlogsGrid
+export default BlogsGrid;
 
 const gridAnimVariants = {
   hidden: {
@@ -65,4 +71,4 @@ const gridAnimVariants = {
       staggerChildren: 0.1,
     }
   }
-}
+};

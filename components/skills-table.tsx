@@ -1,13 +1,13 @@
 
 
-const kTableHeadStyle = "bg-gray-300 border text-left font-normal px-4 py-2"
-const kTableElemStyle = "border px-4 py-2"
+const kTableHeadStyle = "bg-gray-300 border text-left font-normal px-4 py-2";
+const kTableElemStyle = "border px-4 py-2";
 
-const kLanguages = "C#, C++, JavaScript, TypeScript, Python, Rust, HTML, CSS, SQL";
-const kFrameworks = "React, Next.js, Angular, .NET, Node.js";
-const kDatabases = "MySQL, SQLite, MongoDB, DynamoDB";
+const kLanguages = "JavaScript, TypeScript, Python, Go, HTML, CSS, NoSQL, SQL, C#, C++";
+const kFrameworks = "Expressjs, React, Next.js, Angular";
+const kDatabases = "MongoDB, PostgreSQL, SQLite, Redis, Strapi";
 const kCloudInfrastructure = "AWS, GCP";
-const kTools = "Git, Docker, Unity, Unreal Engine, Photoshop, Illustrator, Blender, Houdini FX";
+const kTools = "Git, Docker, Unity, Unreal Engine";
 
 export function SkillsTable() {
   return (
@@ -51,7 +51,7 @@ export function SkillsTable() {
       </tr>
       </tbody>
     </table>
-  )
+  );
 }
 
 
@@ -76,7 +76,7 @@ function GridItem(props: GridItemProps) {
         </p>
       </div>
     </div>
-  )
+  );
 }
 
 
@@ -114,5 +114,5 @@ export function SkillsGrid() {
         />
       </div>
     </div>
-  )
+  );
 }
