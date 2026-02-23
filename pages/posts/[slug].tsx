@@ -80,7 +80,7 @@ export async function getStaticProps({ params }: Params) {
     "coverImage",
   ]);
   if (!post) {
-    return { notFound: true };
+    return { notFound: true, revalidate: 30 };
   }
   const content = await markdownToHtml(post.content || "");
 
@@ -110,6 +110,6 @@ export async function getStaticPaths() {
         },
       };
     }),
-    fallback: false,
+    fallback: 'blocking',
   };
 }
